@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시간 측정</title>
+</head>
+<body>
+<button id="startButton">시간 측정 시작</button>
+<button id="stopButton" style="display:none;">시간 측정 중지</button>
+<div id="timeRecords"></div>
+
+<script>
+let startTime;
+let elapsedTime = 0;
+let timerInterval;
+let timeRecords = [];
+
+document.getElementById('startButton').addEventListener('click', function() {
+  startTime = Date.now() - elapsedTime;
+  timerInterval = setInterval(function() {
+    elapsedTime = Date.now() - startTime;
+  }, 1000);
+  document.getElementById('startButton').style.display = 'none';
+  document.getElementById('stopButton').style.display = 'block';
+});
+
+document.getElementById('stopButton').addEventListener('click', function() {
+  clearInterval(timerInterval);
+  timeRecords.push(elapsedTime);
+  displayTimeRecords();
+  document.getElementById('startButton').style.display = 'block';
+  document.getElementById('stopButton').style.display = 'none';
+  elapsedTime = 0;
+});
+
+function displayTimeRecords() {
+  let recordsDiv = document.getElementById('timeRecords');
+  let recordsList = document.createElement('ul');
+  recordsDiv.innerHTML = '';
+  timeRecords.forEach(function(time, index) {
+    let recordItem = document.createElement('li');
+    recordItem.textContent = '기록 ' + (index + 1) + ': ' + formatTime(time);
+    recordsList.appendChild(recordItem);
+  });
+  recordsDiv.appendChild(recordsList);
+}
+
+function formatTime(milliseconds) {
+  let totalSeconds = Math.floor(milliseconds / 1000);
+  let minutes = Math.floor(totalSeconds / 60);
+  let seconds = totalSeconds % 60;
+  return minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+}
+</script>
+</body>
+</html>

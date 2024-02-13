@@ -1,0 +1,22 @@
+startTime: 타이머가 시작된 시간을 저장 변수
+elapsedTime: 타이머 시작 후 지나간 시간 저장 변수
+timerInterval: 타이머의 갱신을 위한 setInterval의 참조를 저장하는 변수
+timeRecords: 타이머가 중지될 때마다 각 라운드의 경과 시간을 저장하는 배열
+
+
+
+함수/메소드
+1) startButton의 click 이벤트 리스너:
+타이머가 시작되면 현재 시간을 startTime에 저장하고, 1초마다 elapsedTime을 업데이트, 
+시작 버튼을 숨기고, 중지 버튼을 보이게 합니다.
+
+2) stopButton의 click 이벤트 리스너:
+setInterval을 정지시키고, elapsedTime을 timeRecords 배열에 추가
+타이머 기록을 표시하고, 시작 버튼을 보이게 하고, 중지 버튼을 숨깁니다.
+
+
+3) displayTimeRecords() 함수:
+timeRecords 배열의 각 요소를 가져와서 HTML 요소로 변환하여 타이머 기록을 표시합니다.
+
+4) formatTime(milliseconds) 함수:
+밀리초 단위의 시간을 받아와서 분:초 형식으로 변환하여 반환합니다.
