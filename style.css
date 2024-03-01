@@ -1,0 +1,55 @@
+@charset "UTF-8";
+  
+ body{
+	 font-size:13px;
+	 font-family:Malgun Gothic;
+ }
+ 
+  
+#container {
+	width:90%;
+	margin:20px;
+}
+
+header, footer {
+	background-color:rgb(205, 233, 252);
+	text-align:right;
+}
+
+#contents {
+	background-color:rgb(228, 245, 254);
+	display:flex;
+	flex-wrap:wrap;
+	
+}
+
+.article{
+	border : 1px solid #999;
+	width:300px;
+	padding:20px;
+	background-color:#fff;
+
+}
+
+.articleTitle{
+	background-color:rgb(201, 221, 248);
+	padding:10px;
+	text-align:center;
+}
+
+.articleUserName {
+	text-align:right;
+	padding:10px;
+}
+
+.articleDate{
+	text-align:right;
+}
+
+.write{
+	border-top:20px;
+}
+
+button {
+
+}
