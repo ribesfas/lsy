@@ -37,21 +37,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service /*비즈니스 로직임을 선언함 */
 @AllArgsConstructor
-public class MemberService implements UserDetailsService {
+public class MemberService implements 
+/*MemberService : UserDetailsService 인터페이스를 구현한 클래스, 사용자 정보를 로드할 때 사용 */
+UserDetailsService {
     private MemberRepository memberRepository;
+    /*MemberRepository 타입의 memberRepository 필드를 선언하다. 이 필드는 회원 정보를 데이터베이스에 저장하고 조회하는 데 사용 */
 
     // 회원가입
-    @Transactional
+    @Transactional /*하나의 트랜잭션으로 실행되어야 한다  이 메소드 내에서 발생하는 모든 데이터 베이스 조작은 하나의 트랜잭션 내에서 처리됨 */
     public Long signUp(MemberDto memberDto) {
+        /*signUp 메서드 : 회원가입을 처리하는 메서드 MemberDto 객체를 받아 저장된 회원 ID를 반환함. */
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        /*BCryptPasswordEncoder 클래스를 사용하여 비밀번호를 해시화하다.  */
         memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
-
+/*입력받은 비밀번호를 BCryptPasswordEncoder를 사용하여 해시화한 후에 MemberDto 객체에 설정. 해시화한 다음에 DB에 저장 */
         // password를 암호화 한 뒤 dp에 저장
 
         return memberRepository.save(memberDto.toEntity()).getId();
     }
+    /*memberDto 객체를 MemberEntity로 변환한 후, memberRepository를 사용하여 데이터베이스에 저장. 저장된 회원의 ID를 반환합니다. */
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
